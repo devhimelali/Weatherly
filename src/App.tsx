@@ -1,13 +1,13 @@
-
-
+import {BrowserRouter} from "react-router-dom";
+import Layout from "./components/Layout";
 function App() {
-
-
-  return (
-    <>
-      <h1>Hello World!</h1>
-    </>
-  )
+    return (
+        <>
+            <BrowserRouter>
+<Layout></Layout>
+            </BrowserRouter>
+        </>
+    )
 }
 
 export default App
