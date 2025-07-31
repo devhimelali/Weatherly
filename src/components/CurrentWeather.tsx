@@ -1,5 +1,5 @@
 import type {GeocodingResponse, WeatherData} from "@/api/types.ts";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
+import {Card, CardContent} from "@/components/ui/card.tsx";
 import {ArrowDown, ArrowUp, Droplets, Wind} from "lucide-react";
 
 interface CurrentWeatherProps {
@@ -10,7 +10,7 @@ interface CurrentWeatherProps {
 export default function CurrentWeather({data, locationName}: CurrentWeatherProps) {
     const {
         weather: [currentWeather],
-        main: {temp, feels_like, temp_min, temp_max, pressure, humidity},
+        main: {temp, feels_like, temp_min, temp_max, humidity},
         wind: {speed},
     } = data
 

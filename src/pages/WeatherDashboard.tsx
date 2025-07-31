@@ -5,6 +5,7 @@ import LoadingSkeleton from "@/components/loading-skeleton.tsx";
 import CurrentWeather from "@/components/CurrentWeather.tsx";
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert.tsx";
 import {useForecastQuery, useReverseGeocodeQuery, useWeatherQuery} from "@/hooks/use-weather.ts";
+import HourlyTemperature from "@/components/HourlyTemperature.tsx";
 
 export default function WeatherDashboard() {
     const {coordinates, getLocation, error: locationError, isLoading: locationLoading} = useGeolocation();
@@ -97,9 +98,9 @@ export default function WeatherDashboard() {
             </div>
 
             <div className="grid gap-6">
-                <div>
+                <div className="flex flex-col lg:flex-row gap-4">
                     <CurrentWeather data={weatherQuery.data} locationName={locationName}/>
-                    //TODO: Hourly Temperature
+                    <HourlyTemperature data={forecastQuery.data}/>
                 </div>
                 <div>
                     //TODO: Daily Details
