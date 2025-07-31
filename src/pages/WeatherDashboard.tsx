@@ -2,6 +2,7 @@ import {Button} from "@/components/ui/button.tsx";
 import {AlertCircle, MapPin, RefreshCw} from "lucide-react";
 import {useGeolocation} from "@/hooks/use-geolocation.ts";
 import LoadingSkeleton from "@/components/loading-skeleton.tsx";
+import CurrentWeather from "@/components/CurrentWeather.tsx";
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert.tsx";
 import {useForecastQuery, useReverseGeocodeQuery, useWeatherQuery} from "@/hooks/use-weather.ts";
 
@@ -57,7 +58,7 @@ export default function WeatherDashboard() {
         )
     }
 
-    const locationName = locationQuery.data?.[0].name;
+    const locationName = locationQuery.data?.[0];
 
     if (weatherQuery.error || forecastQuery.error) {
         return (
@@ -74,7 +75,7 @@ export default function WeatherDashboard() {
         )
     }
 
-    if(!weatherQuery.data || !forecastQuery.data) {
+    if (!weatherQuery.data || !forecastQuery.data) {
         return (
             <LoadingSkeleton/>
         )
@@ -90,8 +91,20 @@ export default function WeatherDashboard() {
                     onClick={handleRefresh}
                     disabled={weatherQuery.isFetching || forecastQuery.isFetching}
                 >
-                    <RefreshCw className={`w-4 h-4 ${weatherQuery.isFetching || forecastQuery.isFetching ? "animate-spin" : ""}`}/>
+                    <RefreshCw
+                        className={`w-4 h-4 ${weatherQuery.isFetching || forecastQuery.isFetching ? "animate-spin" : ""}`}/>
                 </Button>
+            </div>
+
+            <div className="grid gap-6">
+                <div>
+                    <CurrentWeather data={weatherQuery.data} locationName={locationName}/>
+                    //TODO: Hourly Temperature
+                </div>
+                <div>
+                    //TODO: Daily Details
+                    //TODO: Forecast
+                </div>
             </div>
         </div>
     );
