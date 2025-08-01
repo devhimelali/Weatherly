@@ -6,6 +6,7 @@ import CurrentWeather from "@/components/CurrentWeather.tsx";
 import HourlyTemperature from "@/components/HourlyTemperature.tsx";
 import WeatherDetails from "@/components/WeatherDetails.tsx";
 import WeatherForecast from "@/components/WeatherForecast.tsx";
+import FavoriteButton from "@/components/FavoriteButton.tsx";
 
 export default function City() {
     const [searchParams] = useSearchParams();
@@ -45,7 +46,7 @@ export default function City() {
                     {params.cityName}, {weatherQuery.data.sys.country}
                 </h1>
                 <div>
-
+                    <FavoriteButton data={{...weatherQuery.data, name: params.cityName}}/>
                 </div>
             </div>
 
