@@ -32,7 +32,7 @@ export default function CitySearch() {
             country,
         })
         setOpen(false);
-        navigate(`/city/${name}?lat=${lat}&lon=${lon}`);
+        navigate(`/cities/${name}?lat=${lat}&lon=${lon}`);
     }
 
     return (
