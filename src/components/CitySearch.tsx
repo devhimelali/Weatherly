@@ -8,11 +8,12 @@ import {
 } from "@/components/ui/command.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {useState} from "react";
-import {Clock, Loader2, Search, XCircle} from "lucide-react";
+import {Clock, Loader2, Search, Star, XCircle} from "lucide-react";
 import {useLocationSearch} from "@/hooks/use-weather.ts";
 import {useNavigate} from "react-router-dom";
 import {useSearchHistory} from "@/hooks/use-search-history.ts";
 import {format} from "date-fns";
+import {useFavorite} from "@/hooks/use-favorite.ts";
 
 export default function CitySearch() {
     const [open, setOpen] = useState(false);
@@ -21,6 +22,7 @@ export default function CitySearch() {
 
     const {data: locations, isLoading} = useLocationSearch(query);
     const {history, addToHistory, clearHistory} = useSearchHistory();
+    const {favorites} = useFavorite()
 
     const handleSelectLocation = (cityData: string) => {
         const [lat, lon, name, country] = cityData.split("|");
@@ -53,11 +55,29 @@ export default function CitySearch() {
                 />
                 <CommandList>
                     {query.length > 2 && !isLoading && <CommandEmpty>No results found.</CommandEmpty>}
-                    <CommandGroup heading="Favorites">
-                        <CommandItem>A</CommandItem>
-                        <CommandItem>B</CommandItem>
-                        <CommandItem>C</CommandItem>
-                    </CommandGroup>
+
+                    {favorites && favorites.length > 0 && (
+                        <CommandGroup heading="Favorite Cities">
+                            {favorites.map((favorite) => (
+                                <CommandItem
+                                    key={favorite.id}
+                                    value={`${favorite.lat} | ${favorite.lon} | ${favorite.name} | ${favorite.country}`}
+                                    onSelect={handleSelectLocation}
+                                >
+                                    <Star className="mr-2 h-4 w-4 text-yellow-500"/>
+                                    <span>{favorite.name}</span>
+                                    {
+                                        favorite.state && (
+                                            <span className="text-muted-foreground">, {favorite.state}</span>
+                                        )
+                                    }
+                                    <span className="text-muted-foreground">, {favorite.country}</span>
+                                    <span
+                                        className="ml-auto text-xs text-muted-foreground">{format(favorite.addedAt, "MMM d, h:mm a")}</span>
+                                </CommandItem>
+                            ))}
+                        </CommandGroup>
+                    )}
 
                     {history && history.length > 0 && (
                         <>
@@ -88,40 +108,43 @@ export default function CitySearch() {
                                             )
                                         }
                                         <span className="text-muted-foreground">, {location.country}</span>
-                                        <span className="ml-auto text-xs text-muted-foreground">{format(location.searchedAt, "MMM d, h:mm a")}</span>
+                                        <span
+                                            className="ml-auto text-xs text-muted-foreground">{format(location.searchedAt, "MMM d, h:mm a")}</span>
                                     </CommandItem>
                                 ))}
                             </CommandGroup>
                         </>
-
                     )}
-                    <CommandSeparator/>
+
                     {locations && locations.length > 0 && (
-                        <CommandGroup heading="Suggestions">
-                            {isLoading && (
-                                <div className="flex items-center justify-center p-4">
-                                    <Loader2 className="h-4 w-4 animate-spin"/>
-                                </div>
-                            )}
-                            {
-                                locations.map((location) => (
-                                    <CommandItem
-                                        key={`${location.lat}-${location.lon}`}
-                                        value={`${location.lat} | ${location.lon} | ${location.name} | ${location.country}`}
-                                        onSelect={handleSelectLocation}
-                                    >
-                                        <Search className="mr-2 h-4 w-4"/>
-                                        <span>{location.name}</span>
-                                        {
-                                            location.state && (
-                                                <span className="text-muted-foreground">, {location.state}</span>
-                                            )
-                                        }
-                                        <span className="text-muted-foreground">, {location.country}</span>
-                                    </CommandItem>
-                                ))
-                            }
-                        </CommandGroup>
+                        <>
+                            <CommandSeparator/>
+                            <CommandGroup heading="Suggestions">
+                                {isLoading && (
+                                    <div className="flex items-center justify-center p-4">
+                                        <Loader2 className="h-4 w-4 animate-spin"/>
+                                    </div>
+                                )}
+                                {
+                                    locations.map((location) => (
+                                        <CommandItem
+                                            key={`${location.lat}-${location.lon}`}
+                                            value={`${location.lat} | ${location.lon} | ${location.name} | ${location.country}`}
+                                            onSelect={handleSelectLocation}
+                                        >
+                                            <Search className="mr-2 h-4 w-4"/>
+                                            <span>{location.name}</span>
+                                            {
+                                                location.state && (
+                                                    <span className="text-muted-foreground">, {location.state}</span>
+                                                )
+                                            }
+                                            <span className="text-muted-foreground">, {location.country}</span>
+                                        </CommandItem>
+                                    ))
+                                }
+                            </CommandGroup>
+                        </>
                     )}
                 </CommandList>
             </CommandDialog>
