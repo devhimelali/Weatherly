@@ -24,7 +24,7 @@ export default function HourlyTemperature({data}: HourlyTemperatureProps) {
                     <LineChart data={chartData}>
                         <XAxis
                             dataKey="time"
-                            stoke="#888888"
+                            stroke="#888888"
                             tickLine={false}
                             axisLine={false}
                             tickFormatter={(value) => `${value}°`}

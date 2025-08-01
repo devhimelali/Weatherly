@@ -12,7 +12,6 @@ function App() {
         defaultOptions: {
             queries: {
                 staleTime: 5 * 60 * 1000,
-                getTime: 10 * 60 * 1000,
                 retry: false,
                 refetchOnWindowFocus: false,
             }
