@@ -6,6 +6,7 @@ import CurrentWeather from "@/components/CurrentWeather.tsx";
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert.tsx";
 import {useForecastQuery, useReverseGeocodeQuery, useWeatherQuery} from "@/hooks/use-weather.ts";
 import HourlyTemperature from "@/components/HourlyTemperature.tsx";
+import WeatherDetails from "@/components/WeatherDetails.tsx";
 
 export default function WeatherDashboard() {
     const {coordinates, getLocation, error: locationError, isLoading: locationLoading} = useGeolocation();
@@ -103,7 +104,7 @@ export default function WeatherDashboard() {
                     <HourlyTemperature data={forecastQuery.data}/>
                 </div>
                 <div>
-                    //TODO: Daily Details
+                    <WeatherDetails data={weatherQuery.data}/>
                     //TODO: Forecast
                 </div>
             </div>
