@@ -9,7 +9,7 @@ interface FavoriteButtonProps {
 }
 
 export default function FavoriteButton({data}: FavoriteButtonProps) {
-    const {isFavorite, favorites, addToFavorite, removeFromFavorite} = useFavorite()
+    const {isFavorite, addToFavorite, removeFromFavorite} = useFavorite()
     const isCurrentFavorite = isFavorite(data.coord.lat, data.coord.lon);
 
     const handleToggleFavorite = () => {

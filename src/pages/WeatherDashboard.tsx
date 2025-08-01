@@ -8,6 +8,7 @@ import {useForecastQuery, useReverseGeocodeQuery, useWeatherQuery} from "@/hooks
 import HourlyTemperature from "@/components/HourlyTemperature.tsx";
 import WeatherDetails from "@/components/WeatherDetails.tsx";
 import WeatherForecast from "@/components/WeatherForecast.tsx";
+import FavoriteCities from "@/components/FavoriteCities.tsx";
 
 export default function WeatherDashboard() {
     const {coordinates, getLocation, error: locationError, isLoading: locationLoading} = useGeolocation();
@@ -86,6 +87,7 @@ export default function WeatherDashboard() {
 
     return (
         <div className="space-y-4">
+            <FavoriteCities/>
             <div className="flex items-center justify-between">
                 <h1 className="text-xl font-bold tracking-tight">My Location</h1>
                 <Button
