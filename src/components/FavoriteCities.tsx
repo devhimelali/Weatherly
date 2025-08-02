@@ -1,5 +1,5 @@
 import {useFavorite} from "@/hooks/use-favorite.ts";
-import {ScrollArea} from "@/components/ui/scroll-area.tsx";
+import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area.tsx";
 import {useNavigate} from "react-router-dom";
 import {useWeatherQuery} from "@/hooks/use-weather.ts";
 import {Button} from "@/components/ui/button.tsx";
@@ -34,6 +34,7 @@ export default function FavoriteCities() {
                         />
                     ))}
                 </div>
+                <ScrollBar orientation="horizontal" />
             </ScrollArea>
         </div>
     );
