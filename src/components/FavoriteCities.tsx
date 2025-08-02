@@ -22,7 +22,7 @@ export default function FavoriteCities() {
     }
 
     return (
-        <>
+        <div className="space-y-4">
             <h1 className="text-xl font-bold tracking-tight">Favorites</h1>
             <ScrollArea className="w-full pb-4">
                 <div className="flex gap-4">
@@ -35,7 +35,7 @@ export default function FavoriteCities() {
                     ))}
                 </div>
             </ScrollArea>
-        </>
+        </div>
     );
 }
 
