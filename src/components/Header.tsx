@@ -10,12 +10,12 @@ export default function Header() {
     const isDark = theme === "dark";
     return (
         <header
-            className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur py-2 supports-[backdrop-filter]:bg-background/60">
-            <div className="container mx-auto flex items-center justify-between px-4 h-16">
-                <Link to={"/"}>
-                    <img src={isDark ? DarkLogo : Logo} alt="Weatherly Logo" className="h-14"/>
+            className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur py-2 supports-[backdrop-filter]:bg-background/60 overflow-hidden">
+            <div className="container mx-auto flex items-center justify-between px-4 h-auto sm:h-16 gap-2 sm:gap-0">
+                <Link to={"/"} className="flex-shrink-0">
+                    <img src={isDark ? DarkLogo : Logo} alt="Weatherly Logo" className="h-12 sm:h-14"/>
                 </Link>
-                <div className="flex items-center gap-4">
+                <div className="flex flex-1 justify-end items-center gap-2 sm:gap-4 w-full sm:w-auto">
                     <CitySearch/>
                     <div onClick={() => setTheme(isDark ? "light" : "dark")}
                          className={`flex items-center cursor-pointer transition-transform duration-500 ${isDark ? "rotate-180" : "rotate-0"}`}
