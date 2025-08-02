@@ -58,29 +58,29 @@ export default function WeatherForecast({data}: WeatherForecastProps) {
                     {nextDays.map((day) => (
                         <div key={day.date} className="grid grid-cols-3 items-center gap-4 rounded-lg border p-4">
                             <div>
-                                <p className="font-medium">{format(new Date(day.date * 1000), "EEE, MMM, dd")}</p>
-                                <p className="text-sm text-muted-foreground capitalize">{day.weather.description}</p>
+                                <p className="text-sm md:text-base font-medium">{format(new Date(day.date * 1000), "EEE, MMM, dd")}</p>
+                                <p className="text-xs md:text-sm text-muted-foreground capitalize">{day.weather.description}</p>
                             </div>
 
-                            <div className="flex justify-center gap-4">
-                                <span className="flex items-center text-blue-500">
-                                    <ArrowDown className="mr-1 h-4 w-4"/>
+                            <div className="flex flex-col md:flex-row justify-center gap-1 md:gap-4">
+                                <span className="flex items-center text-blue-500 text-xs md:text-base">
+                                    <ArrowDown className="mr-1 h-2 w-2 md:h-4 md:w-4"/>
                                     {formatTemperature(day.temp_min)}
                                 </span>
-                                <span className="flex items-center text-red-500">
-                                    <ArrowUp className="mr-1 h-4 w-4"/>
+                                <span className="flex items-center text-red-500 text-xs md:text-base">
+                                    <ArrowUp className="mr-1 h-2 w-2 md:h-4 md:w-4"/>
                                     {formatTemperature(day.temp_max)}
                                 </span>
                             </div>
 
-                            <div className="flex justify-end gap-4">
+                            <div className="flex flex-col md:flex-row justify-end gap-1 md:gap-4">
                                 <span className="flex items-center gap-1">
-                                    <Droplets className="h-4 w-4 text-blue-500"/>
-                                    <span className="text-sm">{day.humidity}%</span>
+                                    <Droplets className="h-2 w-2 md:h-4 md:w-4 text-blue-500"/>
+                                    <span className="text-xs md:text-sm">{day.humidity}%</span>
                                 </span>
                                 <span className="flex items-center gap-1">
-                                    <Wind className="h-4 w-4 text-blue-500"/>
-                                    <span className="text-sm">{day.wind} m/s</span>
+                                    <Wind className="h-2 w-2 md:h-4 md:w-4 text-blue-500"/>
+                                    <span className="text-xs md:text-sm">{day.wind} m/s</span>
                                 </span>
                             </div>
                         </div>

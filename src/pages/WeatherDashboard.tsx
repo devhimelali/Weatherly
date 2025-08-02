@@ -102,7 +102,7 @@ export default function WeatherDashboard() {
             </div>
 
             <div className="grid gap-6">
-                <div className="flex flex-col lg:flex-row gap-4">
+                <div className="flex flex-col lg:flex-row gap-4 max-w-full overflow-x-auto">
                     <CurrentWeather data={weatherQuery.data} locationName={locationName}/>
                     <HourlyTemperature data={forecastQuery.data}/>
                 </div>
