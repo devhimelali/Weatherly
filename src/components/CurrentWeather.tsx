@@ -38,7 +38,7 @@ export default function CurrentWeather({data, locationName}: CurrentWeatherProps
                         </div>
 
                         <div className="flex items-center gap-4">
-                            <p className="text-6xl md:text-7xl font-bold tracking-tighter">{formatTemperature(temp)}</p>
+                            <p className="text-[38px] md:text-7xl font-bold tracking-tighter">{formatTemperature(temp)}</p>
                             <div className="space-y-1">
                                 <p className="text-sm font-medium text-muted-foreground">Feels
                                     like {formatTemperature(feels_like)}</p>
